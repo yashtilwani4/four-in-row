@@ -48,12 +48,15 @@ func (m *Manager) CreateGame(player1, player2 *models.Player) *models.Game {
 		State:       models.GameStatePlaying,
 		Players:     [2]*models.Player{player1, player2},
 		CurrentTurn: models.PlayerRed, // Red always starts
+		CurrentTurnNumber: 1, // Red = 1
 		CreatedAt:   time.Now(),
 	}
 
-	// Assign colors
+	// Assign colors and numbers
 	game.Players[0].Color = models.PlayerRed
+	game.Players[0].Number = 1 // Red = 1
 	game.Players[1].Color = models.PlayerYellow
+	game.Players[1].Number = 2 // Yellow = 2
 
 	m.games[game.ID] = game
 	return game
@@ -120,8 +123,10 @@ func (m *Manager) MakeMove(gameID uuid.UUID, playerID uuid.UUID, column int) (*m
 		// Switch turns
 		if game.CurrentTurn == models.PlayerRed {
 			game.CurrentTurn = models.PlayerYellow
+			game.CurrentTurnNumber = 2
 		} else {
 			game.CurrentTurn = models.PlayerRed
+			game.CurrentTurnNumber = 1
 		}
 	}
 

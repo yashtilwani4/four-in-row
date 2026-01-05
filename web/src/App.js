@@ -127,7 +127,7 @@ function AppContent() {
     if (!currentGame || !playerId) return '';
     
     const myPlayer = currentGame.players.find(p => p.id === playerId);
-    const currentPlayerNumber = currentGame.current_turn;
+    const currentPlayerNumber = currentGame.current_turn_number;
     const isMyTurn = myPlayer && myPlayer.number === currentPlayerNumber;
     const turnColor = currentPlayerNumber === 1 ? 'Red' : 'Yellow';
     const currentPlayer = currentGame.players.find(p => p.number === currentPlayerNumber);

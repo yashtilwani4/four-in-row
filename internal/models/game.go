@@ -25,6 +25,7 @@ type Player struct {
 	ID       uuid.UUID   `json:"id"`
 	Name     string      `json:"name"`
 	Color    PlayerColor `json:"color"`
+	Number   int         `json:"number"` // 1 for Red, 2 for Yellow (for frontend compatibility)
 	IsBot    bool        `json:"is_bot"`
 	Connected bool       `json:"connected"`
 	LastSeen time.Time   `json:"last_seen"`
@@ -36,6 +37,7 @@ type Game struct {
 	Board       [6][7]int   `json:"board"` // 6 rows, 7 columns
 	Players     [2]*Player  `json:"players"`
 	CurrentTurn PlayerColor `json:"current_turn"`
+	CurrentTurnNumber int   `json:"current_turn_number"` // 1 for Red, 2 for Yellow (for frontend)
 	Winner      *PlayerColor `json:"winner,omitempty"`
 	CreatedAt   time.Time   `json:"created_at"`
 	FinishedAt  *time.Time  `json:"finished_at,omitempty"`
