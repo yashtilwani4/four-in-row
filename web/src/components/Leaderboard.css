@@ -1,0 +1,406 @@
+/* Leaderboard Overlay */
+.leaderboard-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.leaderboard-modal {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Header */
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.leaderboard-header h2 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.leaderboard-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.refresh-button,
+.close-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refresh-button:hover,
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.refresh-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Last Updated */
+.last-updated {
+  padding: 8px 24px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Content */
+.leaderboard-content {
+  max-height: 50vh;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.loading-spinner {
+  font-size: 32px;
+  margin-bottom: 16px;
+  animation: spin 1s linear infinite;
+}
+
+/* Error State */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #e74c3c;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.error-details {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.retry-button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.retry-button:hover {
+  background: #c0392b;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #666;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.empty-subtitle {
+  font-size: 14px;
+  color: #999;
+}
+
+/* Table */
+.leaderboard-table-container {
+  overflow-x: auto;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.leaderboard-table th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.leaderboard-table th:first-child {
+  text-align: center;
+  width: 80px;
+}
+
+.leaderboard-table th:last-child {
+  width: 140px;
+}
+
+.leaderboard-row {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.leaderboard-row:hover {
+  background-color: #f8f9ff;
+}
+
+.leaderboard-row:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.leaderboard-row:nth-child(even):hover {
+  background-color: #f0f1ff;
+}
+
+.leaderboard-table td {
+  padding: 16px 12px;
+  vertical-align: middle;
+}
+
+/* Rank Cell */
+.rank-cell {
+  text-align: center;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.rank-badge.rank-gold {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #b8860b;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+.rank-badge.rank-silver {
+  background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+  color: #666;
+  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.3);
+}
+
+.rank-badge.rank-bronze {
+  background: linear-gradient(135deg, #cd7f32, #daa520);
+  color: #8b4513;
+  box-shadow: 0 2px 8px rgba(205, 127, 50, 0.3);
+}
+
+.rank-badge.rank-default {
+  background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+  color: #495057;
+}
+
+/* Player Cell */
+.player-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Stat Cells */
+.stat-value {
+  font-weight: 600;
+  color: #34495e;
+}
+
+.wins-cell .stat-value {
+  color: #27ae60;
+}
+
+.losses-cell .stat-value {
+  color: #e74c3c;
+}
+
+.draws-cell .stat-value {
+  color: #f39c12;
+}
+
+/* Win Rate Cell */
+.winrate-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.winrate-value {
+  font-weight: 700;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.winrate-bar {
+  width: 100%;
+  height: 6px;
+  background: #ecf0f1;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.winrate-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e74c3c 0%, #f39c12 50%, #27ae60 100%);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Footer */
+.leaderboard-footer {
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leaderboard-note,
+.leaderboard-stats {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .leaderboard-modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .leaderboard-header {
+    padding: 16px 20px;
+  }
+  
+  .leaderboard-header h2 {
+    font-size: 20px;
+  }
+  
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 12px 8px;
+    font-size: 13px;
+  }
+  
+  .rank-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  .winrate-container {
+    min-width: 80px;
+  }
+  
+  .leaderboard-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboard-table th:nth-child(4),
+  .leaderboard-table td:nth-child(4),
+  .leaderboard-table th:nth-child(5),
+  .leaderboard-table td:nth-child(5) {
+    display: none;
+  }
+  
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 10px 6px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,71 @@
+# Environment files
+.env
+.env.local
+.env.production
+.env.development
+
+# Go build artifacts
+main
+server
+connect-four-backend
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+web/build/
+web/dist/
+build/
+dist/
+*.tar.gz
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Coverage reports
+coverage.txt
+*.cover
+
+# Test files (if you add them later)
+test_output/
+*.test.log
+
+DEPLOY_NOW.md
+
+POSTGRES_SETUP.md

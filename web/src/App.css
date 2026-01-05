@@ -1,0 +1,480 @@
+/* Global Styles */
+.App {
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.App-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.App-header h1 {
+  margin: 20px 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Status Bar */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+}
+
+.connection-status {
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: rgba(255,255,255,0.2);
+}
+
+.leaderboard-button {
+  background-color: #ffd700;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.leaderboard-button:hover {
+  background-color: #ffed4e;
+  transform: translateY(-1px);
+}
+
+/* Messages */
+.error {
+  background-color: #ff4757;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: shake 0.5s ease-in-out;
+}
+
+.message {
+  background-color: #2ed573;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Menu Styles */
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.menu input {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.menu input:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.menu button, .queue button, .game button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.menu button:hover, .queue button:hover, .game button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.menu button:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.menu-info {
+  text-align: center;
+  opacity: 0.8;
+  max-width: 400px;
+}
+
+.menu-info p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+/* Queue Styles */
+.queue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loading-spinner {
+  font-size: 2rem;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.queue-info {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* Game Styles */
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.players-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: rgba(255,255,255,0.1);
+  padding: 15px 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.player-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.red-disc {
+  background-color: #ff4757;
+}
+
+.yellow-disc {
+  background-color: #ffa502;
+}
+
+.vs {
+  font-weight: bold;
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.turn-indicator {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 20px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+/* Board Styles */
+.board {
+  background: linear-gradient(145deg, #3742fa, #2f3542);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  margin: 20px 0;
+}
+
+.column-headers {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.column-header {
+  width: 60px;
+  height: 30px;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.column-header:hover:not(.full) {
+  background-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+}
+
+.column-header.full {
+  background-color: rgba(255,255,255,0.1);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.9);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cell:hover {
+  background-color: rgba(255,255,255,1);
+  transform: scale(1.05);
+}
+
+.cell.red {
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff4757);
+  box-shadow: 0 2px 8px rgba(255,71,87,0.4);
+}
+
+.cell.yellow {
+  background: radial-gradient(circle at 30% 30%, #ffd32a, #ffa502);
+  box-shadow: 0 2px 8px rgba(255,165,2,0.4);
+}
+
+.cell.red::after,
+.cell.yellow::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  width: 20%;
+  height: 20%;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 50%;
+}
+
+/* Game Finished */
+.game-finished {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Development stats */
+.dev-stats {
+  background-color: rgba(255,255,255,0.1);
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-family: monospace;
+}
+
+.dev-stats small {
+  opacity: 0.8;
+}
+
+/* Connection warning */
+.connection-warning {
+  color: #ffa502;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Game stats */
+.game-stats {
+  margin-top: 10px;
+  opacity: 0.7;
+}
+
+.game-stats small {
+  font-family: monospace;
+}
+
+/* Reconnecting state */
+.reconnecting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Error click to dismiss */
+.error {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.error:hover {
+  opacity: 0.8;
+}
+
+/* Loading states */
+.menu button:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.menu input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .dev-stats {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  
+  .game-stats small {
+    font-size: 10px;
+  }
+}
+
+/* Accessibility improvements */
+.cell:focus,
+.column-header:focus {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
+}
+
+.menu input:focus,
+.menu button:focus,
+.queue button:focus,
+.game button:focus {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .cell.red {
+    background: #cc0000;
+    border: 2px solid #ffffff;
+  }
+  
+  .cell.yellow {
+    background: #ffcc00;
+    border: 2px solid #000000;
+  }
+  
+  .board {
+    border: 3px solid #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner,
+  .cell,
+  .column-header,
+  .menu button,
+  .queue button,
+  .game button {
+    animation: none;
+    transition: none;
+  }
+  
+  .error,
+  .message {
+    animation: none;
+  }
+}
+/* Demo notice */
+.demo-notice {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.demo-notice p {
+  margin: 5px 0;
+}
+
+.demo-notice strong {
+  color: #ffd700;
+}
