@@ -1,6 +1,7 @@
 package game
 
 import (
+	"log"
 	"sync"
 	"time"
 
@@ -58,6 +59,10 @@ func (m *Manager) CreateGame(player1, player2 *models.Player) *models.Game {
 	game.Players[1].Color = models.PlayerYellow
 	game.Players[1].Number = 2 // Yellow = 2
 
+	log.Printf("DEBUG: Game created. Player1: %s (Color: %d, Number: %d), Player2: %s (Color: %d, Number: %d)", 
+		game.Players[0].Name, game.Players[0].Color, game.Players[0].Number,
+		game.Players[1].Name, game.Players[1].Color, game.Players[1].Number)
+
 	m.games[game.ID] = game
 	return game
 }
@@ -95,6 +100,10 @@ func (m *Manager) MakeMove(gameID uuid.UUID, playerID uuid.UUID, column int) (*m
 	if player == nil {
 		return nil, ErrPlayerNotInGame
 	}
+
+	// Debug logging
+	log.Printf("DEBUG: Player %s (Color: %d, Number: %d) trying to move. Current turn: %d (Number: %d)", 
+		player.Name, player.Color, player.Number, game.CurrentTurn, game.CurrentTurnNumber)
 
 	if player.Color != game.CurrentTurn {
 		return nil, ErrNotPlayerTurn

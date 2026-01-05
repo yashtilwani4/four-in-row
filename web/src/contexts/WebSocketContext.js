@@ -358,7 +358,7 @@ export const WebSocketProvider = ({ children }) => {
       
       // Validate turn
       const myPlayer = state.currentGame.players.find(p => p.id === state.playerId);
-      if (!myPlayer || myPlayer.number !== state.currentGame.current_turn) {
+      if (!myPlayer || myPlayer.number !== state.currentGame.current_turn_number) {
         dispatch({ type: ACTION_TYPES.SET_ERROR, payload: "It's not your turn!" });
         setTimeout(() => {
           dispatch({ type: ACTION_TYPES.SET_ERROR, payload: null });
